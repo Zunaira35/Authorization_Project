@@ -1,0 +1,1 @@
+<h1>Admin can delete article</h1>

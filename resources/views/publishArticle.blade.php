@@ -1,0 +1,1 @@
+<h1>This User can publish articles</h1>
