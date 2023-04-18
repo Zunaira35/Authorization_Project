@@ -70,20 +70,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-       $user =  User::create([
+            $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        $permission1 = Permission::create(['guard_name' => 'web' , 'name' => 'create articles']);
-        $permission2 = Permission::create(['guard_name' => 'web' , 'name' => 'publish articles']);
+        //$permission1 = Permission::create(['guard_name' => 'web' , 'name' => 'create articles']);
+        //$permission2 = Permission::create(['guard_name' => 'web' , 'name' => 'publish articles']);
 
-        $role = Role::create(['guard_name' => 'web' , 'name' => 'writer']);
-        $role->givePermissionTo('create articles');
-        $role->givePermissionTo('publish articles');
+       // $role = Role::create(['guard_name' => 'web' , 'name' => 'writer']);
+       // $role->givePermissionTo('create articles');
+       // $role->givePermissionTo('publish articles');
+       // $user->assignRole($role);
+             $user->assignRole('writer');
+             return $user;
 
-        $user->assignRole($role);
-        return view('auth.login');
+             return view('auth.login');
     }
 
     public function showAdminRegisterForm()
@@ -99,14 +101,14 @@ class RegisterController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        $permission1 = Permission::create(['guard_name' => 'admin' , 'name' => 'edit articles']);
-        $permission2 = Permission::create(['guard_name' => 'admin' , 'name' => 'delete articles']);
+         // $permission1 = Permission::create(['guard_name' => 'admin' , 'name' => 'edit articles']);
+         // $permission2 = Permission::create(['guard_name' => 'admin' , 'name' => 'delete articles']);
+ 
+         //$role = Role::create(['guard_name' => 'admin' , 'name' => 'manager']);
+         //$role->givePermissionTo('edit articles');
+         //$role->givePermissionTo('delete articles');
 
-        $role = Role::create(['guard_name' => 'admin' , 'name' => 'manager']);
-        $role->givePermissionTo('edit articles');
-        $role->givePermissionTo('delete articles');
-
-        $admin->assignRole($role);
+        $admin->assignRole('manager');
         return redirect()->intended('admin');
     }
 }
