@@ -45,7 +45,5 @@ Route::group(['middleware' => ['role:manager']], function () {
     Route::get('/editArticlePage',[HomeController::class,'editArticle'])->name('editArticlePage')->middleware('auth:admin');
     Route::get('/deleteArticlePage',[HomeController::class,'deleteArticle'])->name('deleteArticlePage')->middleware('auth:admin');
 });  
-Route::get('/email/verify', function () {
-    return view('auth.verify');
-})->middleware('auth')->name('verification.notice');
+
 
